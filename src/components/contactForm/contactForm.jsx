@@ -1,7 +1,6 @@
 // import { nanoid } from 'nanoid';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { object, string } from 'yup';
-import PropTypes from 'prop-types';
 import css from './contactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContacts } from 'redux/contactSlice';
@@ -70,12 +69,3 @@ export default function ContactForm() {
     </Formik>
   );
 }
-
-ContactForm.propTypes = {
-  initialValues: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-};
