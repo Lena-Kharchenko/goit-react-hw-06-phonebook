@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import { deleteContact } from 'redux/contactSlice';
 import { useDispatch } from 'react-redux';
 import Notiflix from 'notiflix';
-import PropTypes from 'prop-types';
 import css from './contactList.module.css';
 
 export default function ContactList() {
@@ -39,14 +38,3 @@ export default function ContactList() {
     </>
   );
 }
-ContactList.propTypes = {
-  contactList: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-
-  onChange: PropTypes.func,
-};
