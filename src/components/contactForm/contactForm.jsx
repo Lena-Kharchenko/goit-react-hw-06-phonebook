@@ -1,8 +1,11 @@
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { object, string } from 'yup';
 import PropTypes from 'prop-types';
 import css from './contactForm.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContacts } from 'redux/contactSlice';
+import Notiflix from 'notiflix';
 
 const initialValues = {
   name: '',
@@ -20,9 +23,22 @@ let userSchema = object().shape({
     .required(),
 });
 
-export default function ContactForm({ onSubmit }) {
+export default function ContactForm() {
+  const contactsRedux = useSelector(state => state.contacts);
+
+  const dispatch = useDispatch();
+
   const handleSubmit = ({ name, number }, action) => {
-    onSubmit(nanoid(), name, number);
+    if (contactsRedux.find(contact => contact.name === name) !== undefined) {
+      Notiflix.Notify.failure(`${name} is already saved in your contacts`);
+      return;
+    }
+
+    dispatch(addContacts(name, number));
+    Notiflix.Notify.success(
+      `${name} has been successfully added to your contacts`
+    );
+
     action.resetForm();
   };
 
