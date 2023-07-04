@@ -1,6 +1,5 @@
 import { useDispatch } from 'react-redux';
 import { setStatusFilter } from 'redux/filterSlice';
-import PropTypes from 'prop-types';
 
 export default function ContactFilter() {
   const dispatch = useDispatch();
@@ -16,7 +15,3 @@ export default function ContactFilter() {
     </>
   );
 }
-
-ContactFilter.propTypes = {
-  onChange: PropTypes.func,
-};
